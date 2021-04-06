@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { NavLink, Switch, Route } from 'react-router-dom';
+import LoginBox from "./login/LoginBox"
 
-function App() {
+/*function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello World!</h1>
     </div>
   );
-}
+}*/
+
+const App = () => (
+  <div className='app'>
+    <h1>Inventory management projects front end</h1>
+    <Navigation />
+    <Main />
+  </div>
+);
+
+const Navigation = () => (
+  <nav>
+    <ul>
+      <li><NavLink to='/'>Home</NavLink></li>
+      <li><NavLink to='/login'>Login</NavLink></li>
+    </ul>
+  </nav>
+);
+
+const Home = () => (
+  <div className='home'>
+    <h1>Welcome</h1>
+    <p> This is the front page</p>
+  </div>
+);
+
+const Main = () => (
+  <Switch>
+      <Route exact path='/' component={Home}></Route>
+      <Route exact path='/login' ><LoginBox /></Route>
+  </Switch>
+);
+
 
 export default App;
