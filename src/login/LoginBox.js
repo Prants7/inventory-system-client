@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ConnectionService from "../restConnection/connectionService";
 import "./LoginBox.css";
 
-export default function LoginBox() {
+/*class LoginBox extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+    }*/
+
+export default function LoginBox(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,6 +23,35 @@ export default function LoginBox() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        registerUser();
+    }
+
+    async function registerUser() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        console.log(username.valueOf());
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("username", username.valueOf());
+        urlencoded.append("password", password.valueOf());
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+        //var address = ConnectionService.getBaseAddress() +"public/users/register";
+        //console.log(address);
+        var result = await fetch("http://localhost:8080/public/users/register", requestOptions)
+            .then(response => response.text())
+            /*.then(result => console.log(result))
+            .catch(error => console.log('error', error));*/
+        console.log(result);
+
+        props.tokenAssigning(result);
     }
 
     return (
@@ -42,3 +81,5 @@ export default function LoginBox() {
         </div>
     )
 }
+
+//export LoginBox;
