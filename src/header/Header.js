@@ -11,7 +11,7 @@ class Header extends React.Component {
         return (
             <div>
                 <Navigation/>
-                <AccountSituation/>
+                <AccountSituation accountToken = {this.props.accountToken}/>
             </div>
         )
     }

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import LoginBox from "./login/LoginBox";
 import Header from "./header/Header";
+//import UserContext from "./userContext/UserContext";
 
 /*function App() {
   return (
@@ -15,25 +16,30 @@ import Header from "./header/Header";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { accountToken: "" };
+    this.state = { 
+      accountToken: "" 
+    };
   }
+
+  
 
   render() {
     return (
       <div className='app'>
-      <h1>Inventory management projects front end</h1>
-      <Header />
-        <Switch>
-          <Route exact path='/' component={Home}></Route>
-          <Route exact path='/login' ><LoginBox tokenAssigning= {(newValue) =>this.changeAccountToken(newValue)} /></Route>
-        </Switch>
+          <h1>Inventory management projects front end</h1>
+          <Header accountToken = {this.state.accountToken} />
+          <Switch>
+            <Route exact path='/' component={Home}></Route>
+            <Route exact path='/login' ><LoginBox tokenAssigning= {(newValue) =>this.changeAccountToken(newValue)} /></Route>
+          </Switch>
     </div>
     )
   }
 
   changeAccountToken(newValue) {
-    console.log(newValue);
+    //console.log(newValue);
     this.setState({accountToken: newValue});
+    console.log(this.state.accountToken);
   }
 
 
